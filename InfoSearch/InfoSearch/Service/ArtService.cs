@@ -39,7 +39,7 @@ namespace InfoSearch.Service
                     content.Replace("\r", " ");
                     content.Replace("\t", " ");
 
-                    article.Content = content.Trim().Substring(0, 255);
+                    article.Content = content.Trim();
 
                     var inht = doc.DocumentNode.SelectSingleNode("//meta[@name=\"keywords\"]").Attributes["content"].Value;
 
