@@ -5,7 +5,6 @@ namespace InfoSearch.AppData
 {
     public class ApplicationDbContext : DbContext
     {
-
         public ApplicationDbContext() { }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -13,6 +12,8 @@ namespace InfoSearch.AppData
 
         public DbSet<Articles> Articles { get; set; }
         public DbSet<Students> Students { get; set; }
+        public DbSet<Words_MyStem> Words_MyStems { get; set; }
+        public DbSet<Words_Porter> Words_Porters { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

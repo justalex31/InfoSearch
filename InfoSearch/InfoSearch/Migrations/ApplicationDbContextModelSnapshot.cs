@@ -57,11 +57,57 @@ namespace InfoSearch.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("InfoSearch.Model.Words_MyStem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ArticleId");
+
+                    b.Property<string>("Term");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("Words_MyStems");
+                });
+
+            modelBuilder.Entity("InfoSearch.Model.Words_Porter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ArticleId");
+
+                    b.Property<string>("Term");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("Words_Porters");
+                });
+
             modelBuilder.Entity("InfoSearch.Model.Articles", b =>
                 {
                     b.HasOne("InfoSearch.Model.Students", "Student")
                         .WithMany("Articles")
                         .HasForeignKey("StudentId");
+                });
+
+            modelBuilder.Entity("InfoSearch.Model.Words_MyStem", b =>
+                {
+                    b.HasOne("InfoSearch.Model.Articles", "Article")
+                        .WithMany("Words_MyStems")
+                        .HasForeignKey("ArticleId");
+                });
+
+            modelBuilder.Entity("InfoSearch.Model.Words_Porter", b =>
+                {
+                    b.HasOne("InfoSearch.Model.Articles", "Article")
+                        .WithMany("Words_Porters")
+                        .HasForeignKey("ArticleId");
                 });
 #pragma warning restore 612, 618
         }

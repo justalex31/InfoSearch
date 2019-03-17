@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace InfoSearch.Model
 {
-    public partial class Students
+    public partial class Students : BaseModel
     {
-
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Mygroup { get; set; }

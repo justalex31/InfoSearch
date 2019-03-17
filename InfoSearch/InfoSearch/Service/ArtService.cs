@@ -3,15 +3,16 @@ using InfoSearch.AppData;
 using InfoSearch.Helper;
 using InfoSearch.Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace InfoSearch.Service
 {
-    public class ArtService
+    public class ArtService : BaseContext
     {
-        ApplicationDbContext context = new ApplicationDbContext();
         HtmlWeb web = new HtmlWeb();
-        string url = "https://habr.com/ru/post/";
+        readonly string url = "https://habr.com/ru/post/";
 
         public void FillData(string[] listPost)
         {
@@ -54,6 +55,40 @@ namespace InfoSearch.Service
                     context.SaveChanges();
                 }
             }
+        }
+
+        public Dictionary<Guid, List<string>> GetListWords()
+        {
+            var list = new Dictionary<Guid, List<string>>();
+
+            var stopWords = ReadListPost.ReadStopWords().ToList();
+
+            if (!context.Articles.Any())
+                throw new Exception("Database is empty");
+
+            var articles = context.Articles;
+
+            foreach (var article in articles)
+            {
+                if (article.Content != string.Empty)
+                {
+                    list.Add(article.Id, new List<string>());
+
+                    foreach (var nv in article.Content.Split(" "))
+                    {
+                        var t = Regex.Replace(nv.ToLower(), @"[^\w\s]", "");
+                        if (CheckString(t, list[article.Id], stopWords))
+                            list[article.Id].Add(t);
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        private bool CheckString(string t, List<string> list, List<string> stopwords)
+        {
+            return t != string.Empty && !list.Contains(t) && !stopwords.Contains(t);
         }
 
         public void CreateStud()
