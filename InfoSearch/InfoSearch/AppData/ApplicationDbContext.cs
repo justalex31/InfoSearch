@@ -14,6 +14,8 @@ namespace InfoSearch.AppData
         public DbSet<Students> Students { get; set; }
         public DbSet<Words_MyStem> Words_MyStems { get; set; }
         public DbSet<Words_Porter> Words_Porters { get; set; }
+        public DbSet<Article_Term> Article_Terms { get; set; }
+        public DbSet<Term_List> Term_Lists { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -17,10 +17,13 @@ namespace InfoSearch.Model
 
         public virtual ICollection<Words_Porter> Words_Porters { get; set; }
 
+        public virtual ICollection<Article_Term> Article_Terms { get; set; }
+
         public Articles()
         {
             Words_MyStems = new HashSet<Words_MyStem>();
             Words_Porters = new HashSet<Words_Porter>();
+            Article_Terms = new HashSet<Article_Term>();
         }
     }
 }

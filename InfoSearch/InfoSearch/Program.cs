@@ -24,10 +24,14 @@ namespace InfoSearch
             //artService.CreateStud();
             //artService.FillData(list);
 
-            //Task #2 (работает долго)
-            LemService lem = new LemService();
+            //Task #2 (работает долго много слов)
+            //LemService lem = new LemService();
             //lem.Mystem(artService);
-            lem.Porter(artService);
+            //lem.Porter(artService);
+
+            //Task #3
+            SearchService search = new SearchService();
+            search.IndexIndex();
 
             Console.WriteLine("End program");
             Console.ReadKey();
